@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider } from 'material-ui/styles';
 import Reboot from 'material-ui/Reboot';
 import getPageContext from './getPageContext';
+import { ModuleProvider } from 'redux-modules';
+import { createStore } from 'redux';
+
+const store = createStore(
+  state => state,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 function withRoot(Component) {
   class WithRoot extends React.Component {
@@ -23,16 +30,18 @@ function withRoot(Component) {
     render() {
       // MuiThemeProvider makes the theme available down the React tree thanks to React context.
       return (
-        <MuiThemeProvider
-          theme={this.pageContext.theme}
-          sheetsManager={this.pageContext.sheetsManager}
-        >
-          <div>
-            {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <Reboot />
-            <Component {...this.props} />
-          </div>
-        </MuiThemeProvider>
+        <ModuleProvider store={store}>
+          <MuiThemeProvider
+            theme={this.pageContext.theme}
+            sheetsManager={this.pageContext.sheetsManager}
+          >
+            <div>
+              {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <Reboot />
+              <Component {...this.props} />
+            </div>
+          </MuiThemeProvider>
+        </ModuleProvider>
       );
     }
   }
