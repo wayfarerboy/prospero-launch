@@ -3,7 +3,6 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import { string, object, oneOfType } from 'prop-types';
 import sizeMe from 'react-sizeme';
-import LazyLoad from 'react-lazyload';
 import { withStyles } from 'material-ui/styles';
 
 import cloudinary from '../helpers/cloudinary.js';
@@ -19,14 +18,7 @@ const styles = () => ({
 });
 
 const Image = ({ image, classes, size: { width, height } }) => (
-  <LazyLoad
-    height="100%"
-    placeholder={<img src={image.src} className={classes.img} />}
-    resize
-    offset={64}
-  >
-    <img {...image} className={classes.img} style={{ width, height }} />
-  </LazyLoad>
+  <img {...image} className={classes.img} style={{ width, height }} />
 );
 
 Image.propTypes = {
@@ -45,7 +37,7 @@ export default compose(
     }, {
       cloudName: 'candt',
       width: width || window.innerWidth,
-      height: height || window.innerHeight,
+      height: height || window.innerHeight * 0.8,
       crop: 'fill',
       gravity: 'auto',
     }),
