@@ -1,3 +1,4 @@
+/* global global, process */
 /* eslint-disable no-underscore-dangle */
 
 import { SheetsRegistry } from 'jss';

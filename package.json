@@ -7,7 +7,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+    "deploy": "gatsby build && gh-pages -d public"
   },
   "dependencies": {
     "gatsby": "latest",
@@ -18,9 +18,11 @@
     "material-ui": "next",
     "prop-types": "latest",
     "react-helmet": "latest",
+    "react-lazyload": "^2.3.0",
     "react-move": "^2.6.0",
     "react-redux": "^5.0.6",
     "react-scroll": "^1.7.5",
+    "react-sizeme": "^2.3.6",
     "react-timeout": "^1.0.1",
     "recompose": "latest",
     "redux": "^3.7.2",

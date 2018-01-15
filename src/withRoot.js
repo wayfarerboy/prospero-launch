@@ -1,3 +1,4 @@
+/* global process, window, document */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider } from 'material-ui/styles';
@@ -8,7 +9,7 @@ import { createStore } from 'redux';
 
 const store = createStore(
   state => state,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  process.browser && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
 function withRoot(Component) {

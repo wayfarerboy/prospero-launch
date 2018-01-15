@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string, object } from 'prop-types';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
@@ -20,20 +21,12 @@ const styles = theme => ({
       fontSize: theme.typography.subheading.fontSize,
     },
   },
-  wrapper: {
-    maxWidth: 960,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 2}px`,
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 2}px`,
-    },
-  },
 });
 
-const CopyText = ({ name, item: { title, body }, classes }) => (
+const CopyText = ({ name, item: { title, body }, classes, className }) => (
   <Element name={name}>
     <Paper className={classes.paper}>
-      <div className={classes.wrapper}>
+      <div className={className}>
         <Typography className={classes.title} paragraph type="display1">
           {title}
         </Typography>
@@ -44,5 +37,15 @@ const CopyText = ({ name, item: { title, body }, classes }) => (
     </Paper>
   </Element>
 );
+
+CopyText.propTypes = {
+  name: string,
+  item: shape({
+    title: string,
+    body: string,
+  }),
+  classes: object,
+  className: string,
+};
 
 export default withStyles(styles)(CopyText);
