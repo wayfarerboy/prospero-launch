@@ -15,12 +15,6 @@ const styles = theme => ({
     minHeight: '100vh',
     background: 'linear-gradient(150deg, #263238 0%,#263238 50%,#1d262a 50%,#1d262a 100%)',
   },
-  content: {
-    paddingTop: 56,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: 64,
-    },
-  },
 });
 
 class App extends React.Component {
@@ -37,7 +31,7 @@ class App extends React.Component {
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         </Helmet>
         <Header />
-        <Content className={this.props.classes.content} />
+        <Content />
         <Hidden implementation="css" smUp>
           <Menu />
         </Hidden>

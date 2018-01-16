@@ -1,9 +1,11 @@
+/* global window */
 import React from 'react';
-import { object } from 'prop-types';
-import { compose, withHandlers } from 'recompose';
+import { object, shape, func, number } from 'prop-types';
+import { compose, lifecycle, withHandlers, withState } from 'recompose';
 import { scroller } from 'react-scroll';
 import { connectModule } from 'redux-modules';
 
+import Hidden from 'material-ui/Hidden';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Typography from 'material-ui/Typography';
@@ -12,6 +14,7 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-scroll';
+import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
 
 import { menu as menuModule } from '../redux.js';
 import { links } from '../content/data.js';
@@ -25,6 +28,7 @@ const styles = theme => ({
     bottom: -10,
     objectFit: 'cover',
     height: 64,
+    transformOrigin: 'top left',
   },
   toolbar: {
     alignItems: 'stretch',
@@ -61,16 +65,36 @@ const styles = theme => ({
   },
 });
 
-const Header = ({ actions: { open } = {}, classes, onClick }) => (
+const Header = ({ actions: { open } = {}, classes, onClick, scale }) => (
   <div>
-    <AppBar>
+    <AppBar style={{ transform: `translateY(${scale * -64}px)` }}>
       <Toolbar className={classes.toolbar}>
         <div>
           <IconButton onClick={open} className={classes.menu}>
             <Icon>menu</Icon>
           </IconButton>
         </div>
-        <img className={classes.logo} src={logo} alt="Prospero logo" />
+
+        <Hidden implementation="css" smDown>
+          <img
+            className={classes.logo}
+            src={logo}
+            alt="Prospero logo"
+            style={{
+              bottom: -10 - (130 * scale),
+              transform: `scale(${1 + scale})`,
+            }}
+          />
+        </Hidden>
+
+        <Hidden implementation="css" mdUp>
+          <img
+            className={classes.logo}
+            src={logo}
+            alt="Prospero logo"
+          />
+        </Hidden>
+
         { links.map(({ id, title }, index) => <Button
           color={index === links.length - 1 ? 'accent' : 'default'}
           component={Link}
@@ -93,17 +117,46 @@ const Header = ({ actions: { open } = {}, classes, onClick }) => (
 
 Header.propTypes = {
   classes: object,
+  actions: shape({
+    open: func,
+  }),
+  onClick: func,
+  scale: number,
 };
 
 export default compose(
   withStyles(styles),
+  withWidth(),
   connectModule(menuModule),
+  withState('scale', 'setScale', ({ width }) => {
+    if (isWidthUp('md', width)) return 2;
+    return 0;
+  }),
   withHandlers({
     onClick: () => id => () => {
       scroller.scrollTo(id, {
         offset: -64,
         smooth: true,
       });
+    },
+    onScroll: ({ setScale, scale }) => () => {
+      if (window.scrollY <= 64 * 2) {
+        setScale(1 - (window.scrollY - 64) / 64);
+      } else if (scale > 0 && window.scrollY > 64 * 2) {
+        setScale(0);
+      }
+    },
+  }),
+  lifecycle({
+    componentDidMount() {
+      if (isWidthUp('md', this.props.width)) {
+        window.addEventListener('scroll', this.props.onScroll);
+      }
+    },
+    componentWillUnmount() {
+      if (isWidthUp('md', this.props.width)) {
+        window.removeEventListener('scroll', this.props.onScroll);
+      }
     },
   }),
 )(Header);

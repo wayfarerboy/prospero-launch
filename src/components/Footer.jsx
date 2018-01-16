@@ -62,7 +62,7 @@ const Footer = ({ content, logos, classes, className }) => (
           { index === 1 && <Affiliates className={classes.affiliates} logos={logos} /> }
         </div>) }
         <div className={classes.buttonWrapper}>
-          <Button raised className={classes.button} color="primary">
+          <Button href="http://eepurl.com/bC4oUr" raised className={classes.button} color="primary">
             Join us
           </Button>
         </div>
