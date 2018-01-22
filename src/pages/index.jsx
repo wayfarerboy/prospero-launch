@@ -1,9 +1,9 @@
 import React from 'react';
-import { object } from 'prop-types';
+import { object, bool } from 'prop-types';
 import Helmet from 'react-helmet';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import { withStyles } from 'material-ui/styles';
-import Hidden from 'material-ui/Hidden';
+import withWidth, { isWidthDown } from 'material-ui/utils/withWidth';
 
 import Menu from '../components/Menu.jsx';
 import withRoot from '../withRoot.js';
@@ -39,11 +39,9 @@ class App extends React.Component {
           <link href="https://fonts.googleapis.com/css?family=Catamaran:400,700" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         </Helmet>
-        <Header />
+        <Header smDown={this.props.showMenu} />
         <Content className={this.props.classes.content} />
-        <Hidden implementation="css" smUp>
-          <Menu />
-        </Hidden>
+        { this.props.showMenu && <Menu /> }
       </div>
     );
   }
@@ -51,9 +49,12 @@ class App extends React.Component {
 
 App.propTypes = {
   classes: object,
+  showMenu: bool,
 };
 
 export default compose(
   withRoot,
   withStyles(styles),
+  withWidth(),
+  withProps(({ width }) => ({ showMenu: isWidthDown('sm', width) })),
 )(App);

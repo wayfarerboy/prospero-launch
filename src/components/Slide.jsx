@@ -1,5 +1,4 @@
 import React from 'react';
-import { compose, onlyUpdateForKeys } from 'recompose';
 import { string, object } from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -103,7 +102,4 @@ Slide.propTypes = {
 
 Slide.displayName = 'Slide';
 
-export default compose(
-  withStyles(styles),
-  onlyUpdateForKeys(['className']),
-)(Slide);
+export default withStyles(styles)(Slide);

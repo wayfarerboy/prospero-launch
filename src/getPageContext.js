@@ -3,8 +3,8 @@
 
 import { SheetsRegistry } from 'jss';
 import { createMuiTheme, createGenerateClassName } from 'material-ui/styles';
-import primary from 'material-ui/colors/lightBlue';
-import secondary from 'material-ui/colors/yellow';
+import secondary from 'material-ui/colors/lightBlue';
+import primary from 'material-ui/colors/yellow';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,6 +16,8 @@ const theme = createMuiTheme({
     fontFamily: '"Catamaran", sans-serif',
   },
 });
+
+console.log(theme);
 
 function createPageContext() {
   return {

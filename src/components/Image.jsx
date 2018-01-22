@@ -14,6 +14,10 @@ const styles = () => ({
     height: '100%',
     lineHeight: 0,
     transition: 'all .2s ease-in-out',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
   },
 });
 

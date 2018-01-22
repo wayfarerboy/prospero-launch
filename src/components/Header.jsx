@@ -1,6 +1,6 @@
 /* global window */
 import React from 'react';
-import { object, shape, func, number } from 'prop-types';
+import { object, shape, func, number, bool } from 'prop-types';
 import { compose, lifecycle, withHandlers, withState } from 'recompose';
 import { scroller } from 'react-scroll';
 import { connectModule } from 'redux-modules';
@@ -14,7 +14,6 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-scroll';
-import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
 
 import { menu as menuModule } from '../redux.js';
 import { links } from '../content/data.js';
@@ -23,18 +22,25 @@ import logo from '../media/logo.svg';
 
 const styles = theme => ({
   logo: {
-    width: 210,
+    width: 144,
     position: 'relative',
-    bottom: -10,
+    bottom: -8,
     objectFit: 'cover',
-    height: 64,
+    height: 56,
     transformOrigin: 'top left',
   },
   toolbar: {
     alignItems: 'stretch',
     justifyContent: 'space-between',
+    minHeight: 56,
     [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing.unit,
+    },
+    [theme.breakpoints.up('sm')]: {
+      minHeight: 64,
+    },
+    [theme.breakpoints.up('md')]: {
+      minHeight: 72,
     },
   },
   menu: {
@@ -42,12 +48,14 @@ const styles = theme => ({
     position: 'relative',
     top: '50%',
     transform: 'translateY(-50%)',
+    color: theme.palette.shades.light.text.secondary,
     [theme.breakpoints.down('sm')]: {
       display: 'inline-flex',
     },
   },
   link: {
     borderRadius: 0,
+    color: theme.palette.shades.light.text.secondary,
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -63,9 +71,19 @@ const styles = theme => ({
     boxShadow: theme.shadows[3],
     color: theme.palette.secondary[500],
   },
+  activeRaised: {
+    zIndex: 1,
+    position: 'relative',
+    boxShadow: theme.shadows[3],
+    color: theme.palette.primary[100],
+  },
+  logoLg: {
+    background: theme.palette.primary[500],
+    boxSizing: 'content-box',
+  },
 });
 
-const Header = ({ actions: { open } = {}, classes, onClick, scale }) => (
+const Header = ({ smDown, actions: { open } = {}, classes, onClick, scale }) => (
   <div>
     <AppBar style={{ transform: `translateY(${scale * -64}px)` }}>
       <Toolbar className={classes.toolbar}>
@@ -77,12 +95,15 @@ const Header = ({ actions: { open } = {}, classes, onClick, scale }) => (
 
         <Hidden implementation="css" smDown>
           <img
-            className={classes.logo}
+            className={`${classes.logo} ${classes.logoLg}`}
             src={logo}
             alt="Prospero logo"
             style={{
-              bottom: -10 - (130 * scale),
+              bottom: -15 - (130 * scale),
               transform: `scale(${1 + scale})`,
+              left: -96 * scale,
+              paddingLeft: 32 * scale,
+              paddingRight: 2 * scale,
             }}
           />
         </Hidden>
@@ -95,7 +116,7 @@ const Header = ({ actions: { open } = {}, classes, onClick, scale }) => (
           />
         </Hidden>
 
-        { links.map(({ id, title }, index) => <Button
+        { !smDown && links.map(({ id, title }, index) => <Button
           color={index === links.length - 1 ? 'accent' : 'default'}
           component={Link}
           to={id}
@@ -104,10 +125,10 @@ const Header = ({ actions: { open } = {}, classes, onClick, scale }) => (
           offset={-64}
           raised={index === links.length - 1}
           className={classes.link}
-          activeClass={classes.active}
+          activeClass={index === links.length - 1 ? classes.activeRaised : classes.active}
           onClick={onClick(id)}
         >
-          <Typography type="button">{title}</Typography>
+          <Typography type="button" color="inherit">{title}</Typography>
         </Button>) }
         <div className={classes.flex} />
       </Toolbar>
@@ -122,14 +143,14 @@ Header.propTypes = {
   }),
   onClick: func,
   scale: number,
+  smDown: bool,
 };
 
 export default compose(
   withStyles(styles),
-  withWidth(),
   connectModule(menuModule),
-  withState('scale', 'setScale', ({ width }) => {
-    if (isWidthUp('md', width)) return 2;
+  withState('scale', 'setScale', ({ smDown }) => {
+    if (!smDown) return 2;
     return 0;
   }),
   withHandlers({
@@ -149,12 +170,12 @@ export default compose(
   }),
   lifecycle({
     componentDidMount() {
-      if (isWidthUp('md', this.props.width)) {
+      if (!this.props.smDown) {
         window.addEventListener('scroll', this.props.onScroll);
       }
     },
     componentWillUnmount() {
-      if (isWidthUp('md', this.props.width)) {
+      if (!this.props.smDown) {
         window.removeEventListener('scroll', this.props.onScroll);
       }
     },

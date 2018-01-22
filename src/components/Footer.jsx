@@ -37,7 +37,6 @@ const styles = theme => ({
     fontSize: theme.typography.display1.fontSize,
     padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 8}px`,
     margin: theme.spacing.unit * 4,
-    color: 'white',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.title.fontSize,
     },

@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool, func, shape, object } from 'prop-types';
 import { scroller } from 'react-scroll';
 import { compose, withHandlers } from 'recompose';
 import withTimeout from 'react-timeout';
@@ -33,12 +34,16 @@ const styles = theme => ({
     position: 'absolute',
     top: 0,
     right: 0,
+    color: theme.palette.shades.light.text.secondary,
   },
+  listItem: { color: theme.palette.shades.dark.text.primary },
   active: {
     zIndex: 1,
     position: 'relative',
     boxShadow: theme.shadows[5],
+    color: theme.palette.secondary[500],
   },
+  listItemText: { color: 'inherit' },
 });
 
 const Menu = ({ menu: { open } = {}, actions: { close } = {}, classes, onClick }) => (
@@ -46,6 +51,7 @@ const Menu = ({ menu: { open } = {}, actions: { close } = {}, classes, onClick }
     open={open}
     onClose={close}
     anchor="left"
+    keepMounted
   >
     <AppBar position="static">
       <Toolbar className={classes.toolbar}>
@@ -66,12 +72,24 @@ const Menu = ({ menu: { open } = {}, actions: { close } = {}, classes, onClick }
         offset={-64}
         spy
         activeClass={classes.active}
+        className={classes.listItem}
       >
-        <ListItemText primary={title} />
+        <ListItemText primary={title} classes={{ text: classes.listItemText }} />
       </ListItem>) }
     </List>
   </Drawer>
 );
+
+Menu.propTypes = {
+  menu: shape({
+    open: bool,
+  }),
+  actions: shape({
+    close: func,
+  }),
+  classes: object,
+  onClick: func,
+};
 
 export default compose(
   withTimeout,

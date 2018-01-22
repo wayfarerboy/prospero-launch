@@ -1,6 +1,6 @@
 import React from 'react';
 import { arrayOf, object, func, number, string } from 'prop-types';
-import { defaultProps, compose, withState, withHandlers, onlyUpdateForKeys } from 'recompose';
+import { defaultProps, compose, withState, withHandlers } from 'recompose';
 import withTimeout from 'react-timeout';
 import { Element } from 'react-scroll';
 
@@ -87,5 +87,4 @@ export default compose(
     },
     onStop: ({ tmout, clearInterval }) => () => clearInterval(tmout),
   }),
-  onlyUpdateForKeys(['active']),
 )(Carousel);
