@@ -133,7 +133,6 @@ export const footer = [
 export const logos = [
   { title: 'Arts Council', row: 0 },
   { title: 'China Plate Theatre', row: 1 },
-  { title: 'The Playhouse', row: 2 },
   { title: 'The Blahs Theatre Company', row: 3 },
   { title: 'The Belgrade Theatre', row: 4 },
   { title: 'Severn Arts', row: 5 },
