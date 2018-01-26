@@ -61,7 +61,7 @@ export const carousels = [
   }, {
 
     id: 'students',
-    title: 'A toolkit for practice and assessment University students',
+    title: 'A toolkit for practice and assessment',
     body: 'Students use Prospero to integrate digital technology into their theatre or arts practice, experimenting, testing and learning with its user-friendly interface and innovative cross-platform tools. It’s the perfect tool for assessment.',
     image: 'IMG_0068_wz3kdx',
   }],
