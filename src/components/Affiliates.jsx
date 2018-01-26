@@ -4,6 +4,7 @@ import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 
 const scale = 100;
+const sprites = 10;
 
 const styles = theme => ({
   icon: {
@@ -25,7 +26,7 @@ const Affiliates = ({ logos, classes, className }) => (
       key={`logo-${index}`}
       className={classes.icon}
       style={{
-        backgroundPosition: `0 ${(100 / (logos.length - 1)) * logo.row}%`,
+        backgroundPosition: `0 ${(100 / (sprites - 1)) * logo.row}%`,
       }}
     />) }
   </Grid>
