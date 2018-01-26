@@ -1,9 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Prospero',
+    title: 'Prospero by C&T',
   },
   pathPrefix: '/prospero-launch',
-  plugins: [
-    'gatsby-plugin-react-helmet',
-  ],
 };
