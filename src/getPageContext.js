@@ -17,8 +17,6 @@ const theme = createMuiTheme({
   },
 });
 
-console.log(theme);
-
 function createPageContext() {
   return {
     theme,

@@ -5,21 +5,21 @@ export const carousels = [
     id: 'home',
     title: '',
     body: 'Prospero brings theatre and technology together in a <strong>unique</strong> and <strong>brilliant</strong> way. It makes digital engagement easy. Build your own media-rich online learning resources in minutes, with ease. Expand your audience.',
-    image: 'Teachers_rjffms',
+    image: 'Research_cwn0xj',
 
   }, {
 
     id: 'active',
     title: 'Active not passive',
     body: 'Because it brings theatre and technology together seamlessly, Prospero’s approach is always creative, kinaesthetic and inspiring.',
-    image: 'Research_cwn0xj',
+    image: '1st_P_Dancer_copy_ijwllu_sixod6',
 
   }, {
 
     id: 'everyone',
     title: 'For everyone',
     body: 'Whether you are a theatre, university, gallery, museum, musician, author or artist, Prospero works for you. Prospero connects smartphones, controls tablets, curates the web, uses virtual reality, drones and organises collaboration. Because it’s online you can reach potentially vast audiences with ease and at little cost.',
-    image: 'In_Kenya_mpehka',
+    image: '7P0A0489_qqhdjo',
   }],
 
   // Carousel 2 - 3 slides
@@ -27,21 +27,21 @@ export const carousels = [
     id: 'theatre',
     title: 'The World Wide Web is a stage',
     body: 'If you are a theatre, Prospero can author and distribute drama and workshops to support your programme, education and engagement activities.  If you are a writer, Prospero offers you new ways to tell stories and publish them.',
-    image: 'Teachers_rjffms',
+    image: 'IMG_0277_n8ieul',
 
   }, {
 
     id: 'museum',
     title: 'Curate the web',
     body: 'If you are a museum or gallery, Prospero will digitally curate your collection into media rich tours and guides, bringing art and artefacts to life, at distance for audiences anywhere in the world.',
-    image: 'Research_cwn0xj',
+    image: 'IMG_0163_jnd44v',
 
   }, {
 
     id: 'music',
     title: 'Make and share',
     body: 'For music, Prospero can support work in composition, voice and instrument tuition. Collaborate with musicians from other cultures and traditions.',
-    image: 'In_Kenya_mpehka',
+    image: '7P0A2160_mwksaq',
   }],
 
   // Carousel 3 - 3 slides
@@ -49,21 +49,21 @@ export const carousels = [
     id: 'classroom',
     title: 'Transform classroom learning',
     body: 'If you are a school, Prospero puts you in touching distance of a wealth of arts practitioners and collections through its authoritative Smartscripts.  Or you can use it as a digital lesson planner, building your own for use in your institution.',
-    image: 'Teachers_rjffms',
+    image: 'IMG_0003_4_b8ca6a',
 
   }, {
 
     id: 'university',
     title: 'Practice and research for universities',
     body: 'If you are a university Prospero is a powerful platform for engaging with practitioners and academics around the world.  You can author and publish your own work to share with others.',
-    image: 'Research_cwn0xj',
+    image: 'grab_woe983',
 
   }, {
 
     id: 'students',
     title: 'A toolkit for practice and assessment University students',
     body: 'Students use Prospero to integrate digital technology into their theatre or arts practice, experimenting, testing and learning with its user-friendly interface and innovative cross-platform tools. It’s the perfect tool for assessment.',
-    image: 'In_Kenya_mpehka',
+    image: 'IMG_0068_wz3kdx',
   }],
 
   // Carousel 4 - 4 slides
@@ -78,7 +78,7 @@ export const carousels = [
     id: 'tutorials',
     title: 'Tutorials and expert guidance',
     body: 'In New York City schools and students use Prospero to gain new skills in documentary research, discovering stories of migration in their communities.',
-    image: 'Research_cwn0xj',
+    image: 'IMG_20180126_113100_1_bxh39z',
 
   }, {
 

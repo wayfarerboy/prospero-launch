@@ -3,6 +3,7 @@ import { arrayOf, object, func, number, string } from 'prop-types';
 import { defaultProps, compose, withState, withHandlers } from 'recompose';
 import withTimeout from 'react-timeout';
 import { Element } from 'react-scroll';
+import Waypoint from 'react-waypoint';
 
 import { withStyles } from 'material-ui/styles';
 
@@ -37,20 +38,20 @@ const styles = () => ({
   },
 });
 
-const Carousel = ({
-  items, classes, active, onSelect, name,
-}) => (
+const Carousel = ({ items, classes, active, onSelect, name, onStart, onStop }) => (
   <Element name={name}>
-    <div className={classes.wrapper}>
-      { items.map(({ title, body, id, image }, index) => <Slide
-        key={id}
-        className={`${classes.slide} ${active === index ? classes.active : ''}`}
-        title={title}
-        body={body}
-        image={image}
-      />) }
-      <Controls length={items.length} onSelect={onSelect} active={active} />
-    </div>
+    <Waypoint onEnter={onStart} onLeave={onStop}>
+      <div className={classes.wrapper}>
+        { items.map(({ title, body, id, image }, index) => <Slide
+          key={id}
+          className={`${classes.slide} ${active === index ? classes.active : ''}`}
+          title={title}
+          body={body}
+          image={image}
+        />) }
+        <Controls length={items.length} onSelect={onSelect} active={active} />
+      </div>
+    </Waypoint>
   </Element>
 );
 
@@ -60,6 +61,8 @@ Carousel.propTypes = {
   onSelect: func,
   name: string,
   active: number,
+  onStart: func,
+  onStop: func,
 };
 
 export default compose(
@@ -71,9 +74,6 @@ export default compose(
     duration: 6000,
   }),
   withHandlers({
-    onSelect: ({ setActive }) => index => () => {
-      setActive(index);
-    },
     onNext: ({ setActive, active, items }) => () => {
       setActive((active + 1) % items.length);
     },
@@ -86,5 +86,11 @@ export default compose(
       setTmout(setInterval(onNext, duration));
     },
     onStop: ({ tmout, clearInterval }) => () => clearInterval(tmout),
+  }),
+  withHandlers({
+    onSelect: ({ setActive, onStop, onStart }) => index => () => {
+      onStop();
+      setActive(index, onStart);
+    },
   }),
 )(Carousel);
