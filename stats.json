@@ -4,17 +4,25 @@
       "path---index-a0e39f21c11f6a62c5ab.js",
       "path---index-a0e39f21c11f6a62c5ab.js.map"
     ],
+    "path---privacy": [
+      "path---privacy-a0e39f21c11f6a62c5ab.js",
+      "path---privacy-a0e39f21c11f6a62c5ab.js.map"
+    ],
     "commons": [
-      "commons-74408d54367d5f7ebdc2.js",
-      "commons-74408d54367d5f7ebdc2.js.map"
+      "commons-8601ac5ada32ed5bc378.js",
+      "commons-8601ac5ada32ed5bc378.js.map"
+    ],
+    "component---src-pages-privacy-jsx": [
+      "component---src-pages-privacy-jsx-985da016b4d8db5758cb.js",
+      "component---src-pages-privacy-jsx-985da016b4d8db5758cb.js.map"
     ],
     "component---src-pages-index-jsx": [
-      "component---src-pages-index-jsx-f3ec04bc35c92b30c4cc.js",
-      "component---src-pages-index-jsx-f3ec04bc35c92b30c4cc.js.map"
+      "component---src-pages-index-jsx-75b0cc1046592c687238.js",
+      "component---src-pages-index-jsx-75b0cc1046592c687238.js.map"
     ],
     "app": [
-      "app-440a2e8ad1b513e67f3b.js",
-      "app-440a2e8ad1b513e67f3b.js.map"
+      "app-f927b1589cf62c2fd29f.js",
+      "app-f927b1589cf62c2fd29f.js.map"
     ]
   }
 }
